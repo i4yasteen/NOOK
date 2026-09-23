@@ -1,0 +1,5 @@
+<h1 class="mb-4">Painel administrativo</h1>
+<div class="row g-4">
+<% [['Livros',livros,'/livros'],['Eventos',eventos,'/eventos'],['Clientes',clientes,'/clientes'],['Funcionários',funcionarios,'/funcionarios'],['Reservas pendentes',reservas,'/reservas'],['Participações',participacoes,'/participacoes']].forEach(x=>{ %>
+<div class="col-md-4"><a class="text-decoration-none" href="<%= x[2] %>"><div class="card stat-card h-100"><div class="card-body"><div class="text-muted"><%= x[0] %></div><div class="display-6 fw-bold"><%= x[1] %></div></div></div></a></div>
+<% }) %></div>

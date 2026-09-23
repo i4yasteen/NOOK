@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-100" data-bs-theme="light">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title><%= locals.titulo || 'Nook Cafeteria e Sebo' %></title>
+<link href="/css/bootstrap.min.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet">
+</head>
+<body class="d-flex flex-column min-vh-100">
+<nav class="navbar navbar-expand-lg navbar-dark nook-nav sticky-top">
+ <div class="container">
+  <a class="navbar-brand fw-bold" href="/">☕ Nook</a>
+  <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav"><span class="navbar-toggler-icon"></span></button>
+  <div id="nav" class="collapse navbar-collapse">
+   <ul class="navbar-nav me-auto">
+    <li class="nav-item"><a class="nav-link" href="/">Início</a></li>
+    <li class="nav-item"><a class="nav-link" href="/livros">Livros</a></li>
+    <li class="nav-item"><a class="nav-link" href="/eventos">Eventos</a></li>
+    <li class="nav-item"><a class="nav-link" href="/painel">Painel</a></li>
+    <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Gestão</a>
+      <ul class="dropdown-menu">
+       <li><a class="dropdown-item" href="/clientes">Clientes</a></li><li><a class="dropdown-item" href="/funcionarios">Funcionários</a></li>
+       <li><a class="dropdown-item" href="/participacoes">Participações</a></li><li><a class="dropdown-item" href="/reservas">Reservas</a></li>
+      </ul>
+    </li>
+   </ul>
+   <form method="post" action="/logout"><button class="btn btn-outline-light btn-sm">Sair</button></form>
+  </div>
+ </div>
+</nav>
+<main class="flex-grow-1"><div class="container py-4"><%- body %></div></main>
+<footer class="py-4 bg-dark text-white-50"><div class="container small">Nook Cafeteria e Sebo · Rua Treze de Setembro, 529 · Ji-Paraná/RO</div></footer>
+<script src="/js/bootstrap.bundle.min.js"></script>
+</body></html>

@@ -1,0 +1,5 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Nook · Login</title><link href="/css/bootstrap.min.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet"></head>
+<body class="login-page"><div class="login-card card shadow-lg"><div class="card-body p-4 p-md-5"><div class="text-center mb-4"><div class="brand-mark">☕</div><h1 class="h3">Nook Cafeteria e Sebo</h1><p class="text-muted">Acesse o sistema</p></div>
+<% if(erro){ %><div class="alert alert-danger"><%= erro %></div><% } %>
+<form method="post" action="/login"><label class="form-label">E-mail</label><input class="form-control mb-3" type="email" name="email" required><label class="form-label">Senha</label><input class="form-control mb-4" type="password" name="senha" required><button class="btn btn-nook w-100">ENTRAR</button></form>
+<p class="small text-muted mt-3 mb-0">Credenciais padrão de desenvolvimento: admin@nook.local / 123456. Altere com ADMIN_EMAIL e ADMIN_PASSWORD.</p></div></div><script src="/js/bootstrap.bundle.min.js"></script></body></html>

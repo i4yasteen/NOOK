@@ -1,0 +1,16 @@
+<section class="hero rounded-4 p-5 mb-5">
+ <div class="row align-items-center"><div class="col-lg-8">
+  <span class="badge bg-light text-dark mb-3">Nook Cafeteria e Sebo</span>
+  <h1 class="display-4 fw-bold">Livros, café e encontros que aproximam leitores.</h1>
+  <p class="lead">Consulte o acervo, reserve livros e acompanhe os eventos literários da Nook.</p>
+  <a class="btn btn-light btn-lg" href="/livros">Explorar livros</a>
+  <a class="btn btn-outline-light btn-lg ms-2" href="/eventos">Ver eventos</a>
+ </div></div>
+</section>
+<div class="d-flex justify-content-between align-items-center mb-3"><h2>Livros recentes</h2><a href="/livros">Ver catálogo</a></div>
+<div class="row g-4 mb-5">
+<% livros.forEach(l=>{ %><div class="col-md-4"><div class="card h-100 shadow-sm"><div class="book-cover"><%= l.titulo.charAt(0) %></div><div class="card-body"><h5><%= l.titulo %></h5><p class="text-muted mb-1"><%= l.autor %></p><span class="badge text-bg-light">Estoque: <%= l.estoque %></span></div></div></div><% }) %>
+<% if(!livros.length){ %><div class="col-12"><p class="text-muted">Nenhum livro cadastrado ainda.</p></div><% } %>
+</div>
+<div class="d-flex justify-content-between align-items-center mb-3"><h2>Próximos eventos</h2><a href="/eventos">Ver agenda</a></div>
+<div class="row g-4"><% eventos.forEach(e=>{ %><div class="col-md-4"><div class="card h-100 shadow-sm"><div class="card-body"><div class="text-muted"><%= dateFormat(e.data) %> · <%= e.horario %></div><h5 class="mt-2"><%= e.titulo %></h5><p><%= e.descricao %></p><small><%= e.local %></small></div></div></div><% }) %></div>
