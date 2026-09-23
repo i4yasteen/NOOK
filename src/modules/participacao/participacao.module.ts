@@ -1,0 +1,1 @@
+import { Module } from '@nestjs/common'; import { ParticipacaoController } from './participacao.controller'; @Module({controllers:[ParticipacaoController]}) export class ParticipacaoModule {}
