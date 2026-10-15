@@ -1,1 +1,0 @@
-import { Module } from '@nestjs/common'; import { EventoController } from './evento.controller'; @Module({controllers:[EventoController]}) export class EventoModule {}
