@@ -1,0 +1,30 @@
+<h3 class="mt-5">Livros</h3>
+
+<a href="/livros/novo" class="btn btn-primary mb-3">Novo Livro</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Ano</th>
+            <th>Quantidade</th>
+            <th>Estoque</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% listaLivros.forEach(livro => { %>
+            <tr>
+                <td><%= livro.titulo %></td>
+                <td><%= livro.autor %></td>
+                <td><%= livro.ano %></td>
+                <td><%= livro.quantidade %></td>
+                <td><%- _h.rotuloEstoque(livro.quantidade) %></td>
+                <td>
+                    <a href="/livros/<%= livro.id %>/atualizacao" class="btn btn-sm btn-secondary">Atualizar</a>
+                </td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>
