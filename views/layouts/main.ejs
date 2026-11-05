@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="h-100" data-bs-theme="auto">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= typeof titulo !== 'undefined' ? titulo : 'Nook Cafeteria e Sebo' %></title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+
+<body class="d-flex flex-column h-100">
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="/">Nook Cafeteria e Sebo</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="/livros">Livros</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/eventos">Eventos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/clientes">Clientes</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/funcionarios">Funcionários</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/reservas">Reservas</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/participar">Participações</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="flex-shrink-0">
+        <div class="container mt-4">
+            <%- body %>
+        </div>
+    </main>
+
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container text-center">
+            <span class="text-muted">Nook Cafeteria e Sebo &copy; 2026</span>
+        </div>
+    </footer>
+
+    <script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
