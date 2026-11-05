@@ -1,0 +1,65 @@
+<% const erros = validationErrors(locals.errors); %>
+<% const evento = locals.evento || {} %>
+
+<h3 class="mt-5">
+    <% if (evento?.id) { %>
+        Atualização do
+    <% } else { %>
+        Novo  
+    <% } %>
+    
+    Evento - <%= evento?.titulo %> 
+    <%- evento?.id ? _h.rotuloVagas(evento?.vagas) : '' %>
+</h3>
+
+<form action="<%= evento?.id ? `/eventos/${evento.id}/atualizacao` : '/eventos/novo' %>" method="post">
+
+    <% if (erros.all.length) { %>
+        <div class="alert alert-danger">
+            <h6>Não foi possível salvar o evento</h6>
+            <ul>
+                <% erros.all.forEach(mensagem => { %>
+                    <li><%= mensagem %></li>
+                <% }) %>
+            </ul>
+        </div> 
+    <% } %>
+
+    <div class="form-group mb-3">
+        <label for="titulo" class="form-label">Título</label>
+        <input type="text" class="form-control" name="titulo" value="<%= evento?.titulo %>" placeholder="Informe o título do evento">
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="descricao" class="form-label">Descrição</label>
+        <textarea class="form-control" name="descricao" rows="3" placeholder="Informe a descrição"><%= evento?.descricao %></textarea>
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="data" class="form-label">Data</label>
+        <input type="date" class="form-control" name="data" value="<%= evento?.data %>">
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="horario" class="form-label">Horário</label>
+        <input type="text" class="form-control" name="horario" value="<%= evento?.horario %>" placeholder="Ex: 19:00">
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="local" class="form-label">Local</label>
+        <input type="text" class="form-control" name="local" value="<%= evento?.local %>" placeholder="Informe o local">
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="vagas" class="form-label">Vagas</label>
+        <input type="number" class="form-control" name="vagas" value="<%= evento?.vagas %>" placeholder="Número de vagas">
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="banner" class="form-label">Banner (URL)</label>
+        <input type="text" class="form-control" name="banner" value="<%= evento?.banner %>" placeholder="URL da imagem do banner">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    <a href="/eventos" class="btn btn-secondary">Cancelar</a>
+</form>
