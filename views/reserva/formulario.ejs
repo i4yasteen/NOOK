@@ -1,0 +1,53 @@
+<% const erros = validationErrors(locals.errors); %>
+<% const reserva = locals.reserva || {} %>
+
+<h3 class="mt-5">
+    <% if (reserva?.id) { %>
+        Atualização da
+    <% } else { %>
+        Nova  
+    <% } %>
+    
+    Reserva
+</h3>
+
+<form action="<%= reserva?.id ? `/reservas/${reserva.id}/atualizacao` : '/reservas/novo' %>" method="post">
+
+    <% if (erros.all.length) { %>
+        <div class="alert alert-danger">
+            <h6>Não foi possível salvar a reserva</h6>
+            <ul>
+                <% erros.all.forEach(mensagem => { %>
+                    <li><%= mensagem %></li>
+                <% }) %>
+            </ul>
+        </div> 
+    <% } %>
+
+    <div class="form-group mb-3">
+        <label for="dataReserva" class="form-label">Data da Reserva</label>
+        <input type="datetime-local" class="form-control" name="dataReserva" value="<%= reserva?.dataReserva %>">
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="status" class="form-label">Status</label>
+        <select class="form-control" name="status">
+            <option value="pendente" <%= reserva?.status === 'pendente' ? 'selected' : '' %>>Pendente</option>
+            <option value="concluida" <%= reserva?.status === 'concluida' ? 'selected' : '' %>>Concluída</option>
+            <option value="cancelada" <%= reserva?.status === 'cancelada' ? 'selected' : '' %>>Cancelada</option>
+        </select>
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="clienteId" class="form-label">ID do Cliente</label>
+        <input type="number" class="form-control" name="clienteId" value="<%= reserva?.clienteId %>" placeholder="Informe o ID do cliente">
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="livroId" class="form-label">ID do Livro</label>
+        <input type="number" class="form-control" name="livroId" value="<%= reserva?.livroId %>" placeholder="Informe o ID do livro">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    <a href="/reservas" class="btn btn-secondary">Cancelar</a>
+</form>
