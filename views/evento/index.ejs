@@ -1,0 +1,30 @@
+<h3 class="mt-5">Eventos</h3>
+
+<a href="/eventos/novo" class="btn btn-primary mb-3">Novo Evento</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Título</th>
+            <th>Data</th>
+            <th>Horário</th>
+            <th>Local</th>
+            <th>Vagas</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% listaEventos.forEach(evento => { %>
+            <tr>
+                <td><%= evento.titulo %></td>
+                <td><%= dateFormat(evento.data) %></td>
+                <td><%= evento.horario %></td>
+                <td><%= evento.local %></td>
+                <td><%- _h.rotuloVagas(evento.vagas) %></td>
+                <td>
+                    <a href="/eventos/<%= evento.id %>/atualizacao" class="btn btn-sm btn-secondary">Atualizar</a>
+                </td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>
