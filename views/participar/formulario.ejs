@@ -1,0 +1,44 @@
+<% const erros = validationErrors(locals.errors); %>
+<% const participar = locals.participar || {} %>
+
+<h3 class="mt-5">
+    <% if (participar?.id) { %>
+        Atualização da
+    <% } else { %>
+        Nova  
+    <% } %>
+    
+    Participação
+</h3>
+
+<form action="<%= participar?.id ? `/participar/${participar.id}/atualizacao` : '/participar/novo' %>" method="post">
+
+    <% if (erros.all.length) { %>
+        <div class="alert alert-danger">
+            <h6>Não foi possível salvar a participação</h6>
+            <ul>
+                <% erros.all.forEach(mensagem => { %>
+                    <li><%= mensagem %></li>
+                <% }) %>
+            </ul>
+        </div> 
+    <% } %>
+
+    <div class="form-group mb-3">
+        <label for="dataRegistro" class="form-label">Data de Registro</label>
+        <input type="datetime-local" class="form-control" name="dataRegistro" value="<%= participar?.dataRegistro %>">
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="clienteId" class="form-label">ID do Cliente</label>
+        <input type="number" class="form-control" name="clienteId" value="<%= participar?.clienteId %>" placeholder="Informe o ID do cliente">
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="eventoId" class="form-label">ID do Evento</label>
+        <input type="number" class="form-control" name="eventoId" value="<%= participar?.eventoId %>" placeholder="Informe o ID do evento">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    <a href="/participar" class="btn btn-secondary">Cancelar</a>
+</form>
