@@ -1,0 +1,54 @@
+<% const erros = validationErrors(locals.errors); %>
+<% const funcionario = locals.funcionario || {} %>
+
+<h3 class="mt-5">
+    <% if (funcionario?.id) { %>
+        Atualização do
+    <% } else { %>
+        Novo  
+    <% } %>
+    
+    Funcionário - <%= funcionario?.nome %>
+</h3>
+
+<form action="<%= funcionario?.id ? `/funcionarios/${funcionario.id}/atualizacao` : '/funcionarios/novo' %>" method="post">
+
+    <% if (erros.all.length) { %>
+        <div class="alert alert-danger">
+            <h6>Não foi possível salvar o funcionário</h6>
+            <ul>
+                <% erros.all.forEach(mensagem => { %>
+                    <li><%= mensagem %></li>
+                <% }) %>
+            </ul>
+        </div> 
+    <% } %>
+
+    <div class="form-group mb-3">
+        <label for="nome" class="form-label">Nome</label>
+        <input type="text" class="form-control" name="nome" value="<%= funcionario?.nome %>" placeholder="Informe o nome">
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="cpf" class="form-label">CPF</label>
+        <input type="text" class="form-control" name="cpf" value="<%= funcionario?.cpf %>" placeholder="Informe o CPF">
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="email" class="form-label">E-mail</label>
+        <input type="email" class="form-control" name="email" value="<%= funcionario?.email %>" placeholder="Informe o e-mail">
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="telefone" class="form-label">Telefone</label>
+        <input type="text" class="form-control" name="telefone" value="<%= funcionario?.telefone %>" placeholder="Informe o telefone">
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="funcao" class="form-label">Função</label>
+        <input type="text" class="form-control" name="funcao" value="<%= funcionario?.funcao %>" placeholder="Informe a função">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    <a href="/funcionarios" class="btn btn-secondary">Cancelar</a>
+</form>
