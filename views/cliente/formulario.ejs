@@ -1,0 +1,54 @@
+<% const erros = validationErrors(locals.errors); %>
+<% const cliente = locals.cliente || {} %>
+
+<h3 class="mt-5">
+    <% if (cliente?.id) { %>
+        Atualização do
+    <% } else { %>
+        Novo  
+    <% } %>
+    
+    Cliente - <%= cliente?.nome %>
+</h3>
+
+<form action="<%= cliente?.id ? `/clientes/${cliente.id}/atualizacao` : '/clientes/novo' %>" method="post">
+
+    <% if (erros.all.length) { %>
+        <div class="alert alert-danger">
+            <h6>Não foi possível salvar o cliente</h6>
+            <ul>
+                <% erros.all.forEach(mensagem => { %>
+                    <li><%= mensagem %></li>
+                <% }) %>
+            </ul>
+        </div> 
+    <% } %>
+
+    <div class="form-group mb-3">
+        <label for="nome" class="form-label">Nome</label>
+        <input type="text" class="form-control" name="nome" value="<%= cliente?.nome %>" placeholder="Informe o nome">
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="cpf" class="form-label">CPF</label>
+        <input type="text" class="form-control" name="cpf" value="<%= cliente?.cpf %>" placeholder="Informe o CPF">
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="email" class="form-label">E-mail</label>
+        <input type="email" class="form-control" name="email" value="<%= cliente?.email %>" placeholder="Informe o e-mail">
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="telefone" class="form-label">Telefone</label>
+        <input type="text" class="form-control" name="telefone" value="<%= cliente?.telefone %>" placeholder="Informe o telefone">
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="endereco" class="form-label">Endereço</label>
+        <input type="text" class="form-control" name="endereco" value="<%= cliente?.endereco %>" placeholder="Informe o endereço">
+    </div>
+
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    <a href="/clientes" class="btn btn-secondary">Cancelar</a>
+</form>
