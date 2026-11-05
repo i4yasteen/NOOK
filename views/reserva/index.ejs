@@ -1,0 +1,28 @@
+<h3 class="mt-5">Reservas</h3>
+
+<a href="/reservas/novo" class="btn btn-primary mb-3">Nova Reserva</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Data da Reserva</th>
+            <th>Status</th>
+            <th>Cliente ID</th>
+            <th>Livro ID</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% listaReservas.forEach(reserva => { %>
+            <tr>
+                <td><%= dateFormat(reserva.dataReserva, {}, 'pt-BR', true) %></td>
+                <td><%- _h.rotuloStatus(reserva.status) %></td>
+                <td><%= reserva.clienteId %></td>
+                <td><%= reserva.livroId %></td>
+                <td>
+                    <a href="/reservas/<%= reserva.id %>/atualizacao" class="btn btn-sm btn-secondary">Atualizar</a>
+                </td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>
