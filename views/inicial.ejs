@@ -1,0 +1,14 @@
+<div class="text-center mt-5">
+    <h1><%= titulo %></h1>
+    <p class="lead">Bem-vindo ao sistema da Nook Cafeteria e Sebo.</p>
+    <p>Hora atual: <%= horaAgora %></p>
+
+    <h4 class="mt-4">Equipe</h4>
+    <ul class="list-group">
+        <% listaPessoas.forEach(pessoa => { %>
+            <li class="list-group-item">
+                <%= pessoa.nome %> - <%= pessoa.email %>
+            </li>
+        <% }) %>
+    </ul>
+</div>
