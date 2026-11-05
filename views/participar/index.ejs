@@ -1,0 +1,26 @@
+<h3 class="mt-5">Participações em Eventos</h3>
+
+<a href="/participar/novo" class="btn btn-primary mb-3">Nova Participação</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Data de Registro</th>
+            <th>Cliente ID</th>
+            <th>Evento ID</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% listaParticipacoes.forEach(participar => { %>
+            <tr>
+                <td><%= dateFormat(participar.dataRegistro, {}, 'pt-BR', true) %></td>
+                <td><%= participar.clienteId %></td>
+                <td><%= participar.eventoId %></td>
+                <td>
+                    <a href="/participar/<%= participar.id %>/atualizacao" class="btn btn-sm btn-secondary">Atualizar</a>
+                </td>
+            </tr>
+        <% }) %>
+    </tbody>
+</table>
