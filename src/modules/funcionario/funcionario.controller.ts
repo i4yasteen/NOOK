@@ -63,3 +63,22 @@ export class FuncionarioController {
         await this.funcionarioService.update(id, dados);
     }
 }
+
+
+@Get(':id/exclusao')
+@Render('funcionario/exclusao')
+async formularioExclusao(@Param('id') id: number): Promise<object> {
+    const funcionario = await this.funcionarioService.findOne(id);
+
+    if (!funcionario) {
+        throw new Error('Funcionário não encontrado');
+    }
+
+    return { funcionario, _h: helpers };
+}
+
+@Post(':id/exclusao')
+@Redirect('/funcionarios')
+async formularioExclusaoConfirmar(@Param('id') id: number): Promise<void> {
+    await this.funcionarioService.remove(id);
+}
