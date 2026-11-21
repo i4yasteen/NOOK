@@ -63,3 +63,22 @@ export class EventoController {
         await this.eventoService.update(id, dados);
     }
 }
+
+
+@Get(':id/exclusao')
+@Render('evento/exclusao')
+async formularioExclusao(@Param('id') id: number): Promise<object> {
+    const evento = await this.eventoService.findOne(id);
+
+    if (!evento) {
+        throw new Error('Evento não encontrado');
+    }
+
+    return { evento, _h: helpers };
+}
+
+@Post(':id/exclusao')
+@Redirect('/eventos')
+async formularioExclusaoConfirmar(@Param('id') id: number): Promise<void> {
+    await this.eventoService.remove(id);
+}
