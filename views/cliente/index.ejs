@@ -6,10 +6,8 @@
     <thead>
         <tr>
             <th>Nome</th>
-            <th>CPF</th>
             <th>E-mail</th>
             <th>Telefone</th>
-            <th>Endereço</th>
             <th>Ações</th>
         </tr>
     </thead>
@@ -17,12 +15,11 @@
         <% listaClientes.forEach(cliente => { %>
             <tr>
                 <td><%= cliente.nome %></td>
-                <td><%= cliente.cpf %></td>
                 <td><%= cliente.email %></td>
                 <td><%= cliente.telefone %></td>
-                <td><%= cliente.endereco %></td>
                 <td>
                     <a href="/clientes/<%= cliente.id %>/atualizacao" class="btn btn-sm btn-secondary">Atualizar</a>
+                    <a href="/clientes/<%= cliente.id %>/exclusao" class="btn btn-sm btn-danger">Excluir</a>
                 </td>
             </tr>
         <% }) %>
