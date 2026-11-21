@@ -33,3 +33,12 @@ export class ParticiparService {
         return participar.save();
     }
 }
+
+
+async remove(id: number): Promise<void> {
+    const participar = await this.findOne(id);
+
+    if (participar) {
+        await participar.remove();
+    }
+}
