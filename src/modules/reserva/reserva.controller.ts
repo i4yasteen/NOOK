@@ -63,3 +63,22 @@ export class ReservaController {
         await this.reservaService.update(id, dados);
     }
 }
+
+
+@Get(':id/exclusao')
+@Render('reserva/exclusao')
+async formularioExclusao(@Param('id') id: number): Promise<object> {
+    const reserva = await this.reservaService.findOne(id);
+
+    if (!reserva) {
+        throw new Error('Reserva não encontrada');
+    }
+
+    return { reserva, _h: helpers };
+}
+
+@Post(':id/exclusao')
+@Redirect('/reservas')
+async formularioExclusaoConfirmar(@Param('id') id: number): Promise<void> {
+    await this.reservaService.remove(id);
+}
