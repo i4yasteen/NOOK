@@ -6,9 +6,7 @@
     <thead>
         <tr>
             <th>Nome</th>
-            <th>CPF</th>
             <th>E-mail</th>
-            <th>Telefone</th>
             <th>Função</th>
             <th>Ações</th>
         </tr>
@@ -17,12 +15,11 @@
         <% listaFuncionarios.forEach(funcionario => { %>
             <tr>
                 <td><%= funcionario.nome %></td>
-                <td><%= funcionario.cpf %></td>
                 <td><%= funcionario.email %></td>
-                <td><%= funcionario.telefone %></td>
                 <td><%- _h.rotuloFuncao(funcionario.funcao) %></td>
                 <td>
                     <a href="/funcionarios/<%= funcionario.id %>/atualizacao" class="btn btn-sm btn-secondary">Atualizar</a>
+                    <a href="/funcionarios/<%= funcionario.id %>/exclusao" class="btn btn-sm btn-danger">Excluir</a>
                 </td>
             </tr>
         <% }) %>
