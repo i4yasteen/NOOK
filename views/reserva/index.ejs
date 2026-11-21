@@ -5,22 +5,23 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Data da Reserva</th>
+            <th>Cliente</th>
+            <th>Livro</th>
+            <th>Data</th>
             <th>Status</th>
-            <th>Cliente ID</th>
-            <th>Livro ID</th>
             <th>Ações</th>
         </tr>
     </thead>
     <tbody>
         <% listaReservas.forEach(reserva => { %>
             <tr>
-                <td><%= dateFormat(reserva.dataReserva, {}, 'pt-BR', true) %></td>
+                <td><%= reserva.cliente.nome %></td>
+                <td><%= reserva.livro.titulo %></td>
+                <td><%= dateFormat(reserva.data) %></td>
                 <td><%- _h.rotuloStatus(reserva.status) %></td>
-                <td><%= reserva.clienteId %></td>
-                <td><%= reserva.livroId %></td>
                 <td>
                     <a href="/reservas/<%= reserva.id %>/atualizacao" class="btn btn-sm btn-secondary">Atualizar</a>
+                    <a href="/reservas/<%= reserva.id %>/exclusao" class="btn btn-sm btn-danger">Excluir</a>
                 </td>
             </tr>
         <% }) %>
