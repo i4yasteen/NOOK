@@ -1,0 +1,19 @@
+<h3 class="mt-5">Exclusão de Cliente</h3>
+
+<div class="alert alert-warning mt-3">
+    Deseja realmente excluir o cliente abaixo? Esta ação não pode ser desfeita.
+</div>
+
+<dl class="row">
+    <dt class="col-sm-3">Nome</dt>
+    <dd class="col-sm-9"><%= cliente.nome %></dd>
+    <dt class="col-sm-3">E-mail</dt>
+    <dd class="col-sm-9"><%= cliente.email %></dd>
+    <dt class="col-sm-3">Telefone</dt>
+    <dd class="col-sm-9"><%= cliente.telefone %></dd>
+</dl>
+
+<form action="/clientes/<%= cliente.id %>/exclusao" method="post">
+    <button type="submit" class="btn btn-danger">Confirmar exclusão</button>
+    <a href="/clientes" class="btn btn-secondary">Cancelar</a>
+</form>
