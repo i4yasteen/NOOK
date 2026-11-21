@@ -32,13 +32,12 @@ export class ReservaService {
 
         return reserva.save();
     }
-}
-
 
 async remove(id: number): Promise<void> {
     const reserva = await this.findOne(id);
 
     if (reserva) {
         await reserva.remove();
+        }
     }
 }
