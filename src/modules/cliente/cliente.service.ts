@@ -32,13 +32,12 @@ export class ClienteService {
 
         return cliente.save();
     }
-}
-
 
 async remove(id: number): Promise<void> {
     const cliente = await this.findOne(id);
 
     if (cliente) {
         await cliente.remove();
+        }
     }
 }
