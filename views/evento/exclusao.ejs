@@ -1,0 +1,21 @@
+<h3 class="mt-5">Exclusão de Evento</h3>
+
+<div class="alert alert-warning mt-3">
+    Deseja realmente excluir o evento abaixo? Esta ação não pode ser desfeita.
+</div>
+
+<dl class="row">
+    <dt class="col-sm-3">Nome</dt>
+    <dd class="col-sm-9"><%= evento.nome %></dd>
+    <dt class="col-sm-3">Data</dt>
+    <dd class="col-sm-9"><%= dateFormat(evento.data) %></dd>
+    <dt class="col-sm-3">Local</dt>
+    <dd class="col-sm-9"><%= evento.local %></dd>
+    <dt class="col-sm-3">Vagas</dt>
+    <dd class="col-sm-9"><%- _h.rotuloVagas(evento.vagas) %></dd>
+</dl>
+
+<form action="/eventos/<%= evento.id %>/exclusao" method="post">
+    <button type="submit" class="btn btn-danger">Confirmar exclusão</button>
+    <a href="/eventos" class="btn btn-secondary">Cancelar</a>
+</form>
