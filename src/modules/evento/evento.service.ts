@@ -33,3 +33,12 @@ export class EventoService {
         return evento.save();
     }
 }
+
+
+async remove(id: number): Promise<void> {
+    const evento = await this.findOne(id);
+
+    if (evento) {
+        await evento.remove();
+    }
+}
