@@ -32,13 +32,12 @@ export class LivroService {
 
         return livro.save();
     }
-}
-
 
 async remove(id: number): Promise<void> {
     const livro = await this.findOne(id);
 
     if (livro) {
         await livro.remove();
+        }
     }
 }
