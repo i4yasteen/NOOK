@@ -63,3 +63,22 @@ export class ParticiparController {
         await this.participarService.update(id, dados);
     }
 }
+
+
+@Get(':id/exclusao')
+@Render('participar/exclusao')
+async formularioExclusao(@Param('id') id: number): Promise<object> {
+    const participar = await this.participarService.findOne(id);
+
+    if (!participar) {
+        throw new Error('Participação não encontrada');
+    }
+
+    return { participar, _h: helpers };
+}
+
+@Post(':id/exclusao')
+@Redirect('/participar')
+async formularioExclusaoConfirmar(@Param('id') id: number): Promise<void> {
+    await this.participarService.remove(id);
+}
