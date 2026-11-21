@@ -63,3 +63,22 @@ export class ClienteController {
         await this.clienteService.update(id, dados);
     }
 }
+
+
+@Get(':id/exclusao')
+@Render('cliente/exclusao')
+async formularioExclusao(@Param('id') id: number): Promise<object> {
+    const cliente = await this.clienteService.findOne(id);
+
+    if (!cliente) {
+        throw new Error('Cliente não encontrado');
+    }
+
+    return { cliente, _h: helpers };
+}
+
+@Post(':id/exclusao')
+@Redirect('/clientes')
+async formularioExclusaoConfirmar(@Param('id') id: number): Promise<void> {
+    await this.clienteService.remove(id);
+}
