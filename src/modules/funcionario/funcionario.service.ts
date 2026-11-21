@@ -33,3 +33,12 @@ export class FuncionarioService {
         return funcionario.save();
     }
 }
+
+
+async remove(id: number): Promise<void> {
+    const funcionario = await this.findOne(id);
+
+    if (funcionario) {
+        await funcionario.remove();
+    }
+}
