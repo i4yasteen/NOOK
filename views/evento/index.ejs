@@ -5,9 +5,8 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Título</th>
+            <th>Nome</th>
             <th>Data</th>
-            <th>Horário</th>
             <th>Local</th>
             <th>Vagas</th>
             <th>Ações</th>
@@ -16,13 +15,13 @@
     <tbody>
         <% listaEventos.forEach(evento => { %>
             <tr>
-                <td><%= evento.titulo %></td>
+                <td><%= evento.nome %></td>
                 <td><%= dateFormat(evento.data) %></td>
-                <td><%= evento.horario %></td>
                 <td><%= evento.local %></td>
                 <td><%- _h.rotuloVagas(evento.vagas) %></td>
                 <td>
                     <a href="/eventos/<%= evento.id %>/atualizacao" class="btn btn-sm btn-secondary">Atualizar</a>
+                    <a href="/eventos/<%= evento.id %>/exclusao" class="btn btn-sm btn-danger">Excluir</a>
                 </td>
             </tr>
         <% }) %>
