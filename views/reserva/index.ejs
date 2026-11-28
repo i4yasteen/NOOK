@@ -1,8 +1,8 @@
-<h3 class="mt-5">Reservas</h3>
+<h3>Reservas</h3>
 
 <a href="/reservas/novo" class="btn btn-primary mb-3">Nova Reserva</a>
 
-<table class="table table-striped">
+<div class="table-responsive"><table class="table table-striped">
     <thead>
         <tr>
             <th>Cliente</th>
@@ -20,10 +20,10 @@
                 <td><%= dateFormat(reserva.data) %></td>
                 <td><%- _h.rotuloStatus(reserva.status) %></td>
                 <td>
-                    <a href="/reservas/<%= reserva.id %>/atualizacao" class="btn btn-sm btn-secondary">Atualizar</a>
+                    <a href="/reservas/<%= reserva.id %>/atualizacao" class="btn btn-sm btn-secondary me-1">Atualizar</a>
                     <a href="/reservas/<%= reserva.id %>/exclusao" class="btn btn-sm btn-danger">Excluir</a>
                 </td>
             </tr>
         <% }) %>
     </tbody>
-</table>
+</table></div>
