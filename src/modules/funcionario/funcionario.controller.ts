@@ -62,8 +62,6 @@ export class FuncionarioController {
     async formularioAtualizacaoSalvar(@Param('id') id: number, @Body() dados: CreateFuncionarioDto): Promise<void> {
         await this.funcionarioService.update(id, dados);
     }
-}
-
 
 @Get(':id/exclusao')
 @Render('funcionario/exclusao')
@@ -81,4 +79,5 @@ async formularioExclusao(@Param('id') id: number): Promise<object> {
 @Redirect('/funcionarios')
 async formularioExclusaoConfirmar(@Param('id') id: number): Promise<void> {
     await this.funcionarioService.remove(id);
+}
 }
