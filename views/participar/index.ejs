@@ -1,8 +1,8 @@
-<h3 class="mt-5">Participações</h3>
+<h3>Participações</h3>
 
 <a href="/participar/novo" class="btn btn-primary mb-3">Nova Participação</a>
 
-<table class="table table-striped">
+<div class="table-responsive"><table class="table table-striped">
     <thead>
         <tr>
             <th>Cliente</th>
@@ -18,10 +18,10 @@
                 <td><%= participar.evento.nome %></td>
                 <td><%= dateFormat(participar.data) %></td>
                 <td>
-                    <a href="/participar/<%= participar.id %>/atualizacao" class="btn btn-sm btn-secondary">Atualizar</a>
+                    <a href="/participar/<%= participar.id %>/atualizacao" class="btn btn-sm btn-secondary me-1">Atualizar</a>
                     <a href="/participar/<%= participar.id %>/exclusao" class="btn btn-sm btn-danger">Excluir</a>
                 </td>
             </tr>
         <% }) %>
     </tbody>
-</table>
+</table></div>
