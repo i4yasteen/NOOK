@@ -1,94 +1,27 @@
-<div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
-    <div>
-        <h1 class="h2 mb-1">Eventos</h1>
-        <p class="text-muted mb-0">
-            Encontros, leituras e experiências da comunidade Nook.
-        </p>
-    </div>
+<h3>Clientes</h3>
 
-    <% if (typeof nookUser !== 'undefined' && nookUser && nookUser.role === 'funcionario') { %>
-        <a href="/eventos/novo" class="btn btn-primary">
-            + Adicionar evento
-        </a>
-    <% } %>
-</div>
+<a href="/clientes/novo" class="btn btn-primary mb-3">Novo Cliente</a>
 
-<div class="table-responsive">
-    <table class="table table-striped align-middle">
-        <thead>
+<div class="table-responsive"><table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Telefone</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% listaClientes.forEach(cliente => { %>
             <tr>
-                <th>ID</th>
-                <th>Evento</th>
-                <th>Data</th>
-                <th>Horário</th>
-                <th>Local</th>
-                <th>Vagas</th>
-                <th>Ações</th>
+                <td><%= cliente.nome %></td>
+                <td><%= cliente.email %></td>
+                <td><%= cliente.telefone %></td>
+                <td>
+                    <a href="/clientes/<%= cliente.id %>/atualizacao" class="btn btn-sm btn-secondary me-1">Atualizar</a>
+                    <a href="/clientes/<%= cliente.id %>/exclusao" class="btn btn-sm btn-danger">Excluir</a>
+                </td>
             </tr>
-        </thead>
-
-        <tbody>
-            <% if (typeof listaEventos !== 'undefined' && listaEventos.length > 0) { %>
-
-                <% listaEventos.forEach(evento => { %>
-                    <tr>
-                        <td><%= evento.id %></td>
-
-                        <td>
-                            <strong><%= evento.titulo %></strong>
-                            <div class="small text-muted">
-                                <%= evento.descricao || '' %>
-                            </div>
-                        </td>
-
-                        <td><%= dateFormat(evento.data) %></td>
-                        <td><%= evento.horario %></td>
-                        <td><%= evento.local %></td>
-
-                        <td>
-                            <%- _h.rotuloVagas(evento.vagas) %>
-                        </td>
-
-                        <td>
-                            <% if (typeof nookUser !== 'undefined' && nookUser && nookUser.role === 'funcionario') { %>
-
-                                <a
-                                    href="/eventos/<%= evento.id %>/atualizacao"
-                                    class="btn btn-sm btn-outline-secondary me-1"
-                                >
-                                    Editar
-                                </a>
-
-                                <a
-                                    href="/eventos/<%= evento.id %>/exclusao"
-                                    class="btn btn-sm btn-outline-danger"
-                                >
-                                    Excluir
-                                </a>
-
-                            <% } else { %>
-
-                                <a
-                                    href="/participar/novo"
-                                    class="btn btn-sm btn-primary"
-                                >
-                                    Participar
-                                </a>
-
-                            <% } %>
-                        </td>
-                    </tr>
-                <% }); %>
-
-            <% } else { %>
-
-                <tr>
-                    <td colspan="7" class="text-center text-muted py-4">
-                        Nenhum evento cadastrado ainda.
-                    </td>
-                </tr>
-
-            <% } %>
-        </tbody>
-    </table>
-</div>
+        <% }) %>
+    </tbody>
+</table></div>
