@@ -62,8 +62,6 @@ export class EventoController {
     async formularioAtualizacaoSalvar(@Param('id') id: number, @Body() dados: CreateEventoDto): Promise<void> {
         await this.eventoService.update(id, dados);
     }
-}
-
 
 @Get(':id/exclusao')
 @Render('evento/exclusao')
@@ -81,4 +79,5 @@ async formularioExclusao(@Param('id') id: number): Promise<object> {
 @Redirect('/eventos')
 async formularioExclusaoConfirmar(@Param('id') id: number): Promise<void> {
     await this.eventoService.remove(id);
+}
 }
