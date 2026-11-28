@@ -1,8 +1,8 @@
-<h3 class="mt-5">Funcionários</h3>
+<h3>Funcionários</h3>
 
 <a href="/funcionarios/novo" class="btn btn-primary mb-3">Novo Funcionário</a>
 
-<table class="table table-striped">
+<div class="table-responsive"><table class="table table-striped">
     <thead>
         <tr>
             <th>Nome</th>
@@ -18,10 +18,10 @@
                 <td><%= funcionario.email %></td>
                 <td><%- _h.rotuloFuncao(funcionario.funcao) %></td>
                 <td>
-                    <a href="/funcionarios/<%= funcionario.id %>/atualizacao" class="btn btn-sm btn-secondary">Atualizar</a>
+                    <a href="/funcionarios/<%= funcionario.id %>/atualizacao" class="btn btn-sm btn-secondary me-1">Atualizar</a>
                     <a href="/funcionarios/<%= funcionario.id %>/exclusao" class="btn btn-sm btn-danger">Excluir</a>
                 </td>
             </tr>
         <% }) %>
     </tbody>
-</table>
+</table></div>
