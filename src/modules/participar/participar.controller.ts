@@ -1,8 +1,9 @@
-import { Body, Controller, Get, Param, Post, Redirect, Render } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Redirect, Render, Req } from '@nestjs/common';
 import { ParticiparService } from './participar.service';
 import { helpers } from './participar.view.helpers';
 import { CreateParticiparDto } from './dtos/create-participar.dto';
 import { ValidationView } from 'nest-validation-view';
+import { Evento } from '../evento/evento.entity';
 
 @Controller('participar')
 export class ParticiparController {
@@ -20,19 +21,20 @@ export class ParticiparController {
     @Get('novo')
     @Render('participar/formulario')
     async formularioNovo(): Promise<object> {
-        return {};
+        const listaEventos = await Evento.find();
+        return { listaEventos };
     }
 
     @Post('novo')
-    @Redirect('/participar')
+    @Redirect('/painel')
     @ValidationView('participar/formulario', ({ request, errors }) => {
         return {
             participar: request.body, 
             errors
         };
     })
-    async formularioNovoSalvar(@Body() dados: CreateParticiparDto): Promise<void> {
-        await this.participarService.create(dados);
+    async formularioNovoSalvar(@Req() req: any, @Body() dados: CreateParticiparDto): Promise<void> {
+        await this.participarService.create({ ...dados, clienteId: req.nookUser.clientId, dataRegistro: new Date() });
     }
 
     @Get(':id/atualizacao')
@@ -49,7 +51,7 @@ export class ParticiparController {
     }
 
     @Post(':id/atualizacao')
-    @Redirect('/participar')
+    @Redirect('/painel')
     @ValidationView('participar/formulario', ({ request, errors }) => {
 
         const { params, body } = request;
@@ -62,8 +64,6 @@ export class ParticiparController {
     async formularioAtualizacaoSalvar(@Param('id') id: number, @Body() dados: CreateParticiparDto): Promise<void> {
         await this.participarService.update(id, dados);
     }
-}
-
 
 @Get(':id/exclusao')
 @Render('participar/exclusao')
@@ -78,7 +78,8 @@ async formularioExclusao(@Param('id') id: number): Promise<object> {
 }
 
 @Post(':id/exclusao')
-@Redirect('/participar')
+@Redirect('/painel')
 async formularioExclusaoConfirmar(@Param('id') id: number): Promise<void> {
     await this.participarService.remove(id);
+}
 }
