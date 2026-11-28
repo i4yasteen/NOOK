@@ -62,8 +62,6 @@ export class LivroController {
     async formularioAtualizacaoSalvar(@Param('id') id: number, @Body() dados: CreateLivroDto): Promise<void> {
         await this.livroService.update(id, dados);
     }
-}
-
 
 @Get(':id/exclusao')
 @Render('livro/exclusao')
@@ -81,4 +79,5 @@ async formularioExclusao(@Param('id') id: number): Promise<object> {
 @Redirect('/livros')
 async formularioExclusaoConfirmar(@Param('id') id: number): Promise<void> {
     await this.livroService.remove(id);
+}
 }
