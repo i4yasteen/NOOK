@@ -62,8 +62,6 @@ export class ClienteController {
     async formularioAtualizacaoSalvar(@Param('id') id: number, @Body() dados: CreateClienteDto): Promise<void> {
         await this.clienteService.update(id, dados);
     }
-}
-
 
 @Get(':id/exclusao')
 @Render('cliente/exclusao')
@@ -81,4 +79,5 @@ async formularioExclusao(@Param('id') id: number): Promise<object> {
 @Redirect('/clientes')
 async formularioExclusaoConfirmar(@Param('id') id: number): Promise<void> {
     await this.clienteService.remove(id);
+}
 }
