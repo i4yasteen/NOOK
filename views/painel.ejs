@@ -1,0 +1,24 @@
+<section class="home-hero">
+  <div><div class="home-eyebrow">Área <%= usuario.role === 'funcionario' ? 'do funcionário' : 'do cliente' %></div>
+    <h1>Olá, <%= usuario.role === 'funcionario' ? 'equipe Nook' : 'leitor(a)' %>!</h1>
+    <p>Que bom ter você por aqui. Escolha o que deseja fazer.</p>
+  </div>
+</section>
+<section class="home-section">
+  <% if (usuario.role === 'funcionario') { %>
+    <h2>Gerenciar a Nook</h2><p>Cadastre e mantenha o catálogo e a agenda de eventos atualizados.</p>
+    <div class="quick-links">
+      <a class="quick-link" href="/livros"><strong>✦ Livros</strong><span>Consultar, adicionar, editar e excluir livros</span></a>
+      <a class="quick-link" href="/eventos"><strong>✧ Eventos</strong><span>Consultar, adicionar, editar e excluir eventos</span></a>
+    </div>
+  <% } else { %>
+    <h2>Descobrir e participar</h2><p>Consulte o acervo, reserve um livro ou inscreva-se em um encontro.</p>
+    <div class="quick-links">
+      <a class="quick-link" href="/livros"><strong>✦ Livros</strong><span>Ver livros disponíveis</span></a>
+      <a class="quick-link" href="/eventos"><strong>✧ Eventos</strong><span>Conhecer os próximos eventos</span></a>
+      <a class="quick-link" href="/reservas/novo"><strong>▤ Reservar livro</strong><span>Solicitar a reserva de um livro</span></a>
+      <a class="quick-link" href="/participar/novo"><strong>◎ Participar de evento</strong><span>Registrar sua participação</span></a>
+    </div>
+  <% } %>
+  <div class="mt-4 d-flex justify-content-between align-items-center flex-wrap gap-2"><span class="small text-muted">Conectado como <strong><%= usuario.email %></strong></span><a href="/logout" class="btn btn-outline-secondary">Sair</a></div>
+</section>
