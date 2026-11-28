@@ -1,31 +1,21 @@
-<h3 class="mt-5">Livros</h3>
-
-<a href="/livros/novo" class="btn btn-primary mb-3">Novo Livro</a>
-
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Título</th>
-            <th>Autor</th>
-            <th>Ano</th>
-            <th>Quantidade</th>
-            <th>Estoque</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% listaLivros.forEach(livro => { %>
-            <tr>
-                <td><%= livro.titulo %></td>
-                <td><%= livro.autor %></td>
-                <td><%= livro.ano %></td>
-                <td><%= livro.quantidade %></td>
-                <td><%- _h.rotuloEstoque(livro.quantidade) %></td>
-                <td>
-                    <a href="/livros/<%= livro.id %>/atualizacao" class="btn btn-sm btn-secondary">Atualizar</a>
-                    <a href="/livros/<%= livro.id %>/exclusao" class="btn btn-sm btn-danger">Excluir</a>
-                </td>
-            </tr>
-        <% }) %>
-    </tbody>
-</table>
+<div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-4">
+  <div><h1 class="h2 mb-1">Nosso acervo</h1><p class="text-muted mb-0">Escolha uma história para levar com você.</p></div>
+  <% if (nookUser && nookUser.role === 'funcionario') { %><a href="/livros/novo" class="btn btn-primary">+ Adicionar livro</a><% } %>
+</div>
+<div class="book-grid">
+  <% listaLivros.forEach(livro => { %>
+    <article class="book-card">
+      <div class="book-cover-wrap">
+        <% if (livro.capa) { %><img class="book-cover" src="<%= livro.capa %>" alt="Capa de <%= livro.titulo %>" loading="lazy" referrerpolicy="no-referrer"><% } else { %><div class="book-cover-placeholder">NOOK<br><span><%= livro.titulo %></span></div><% } %>
+      </div>
+      <div class="book-info">
+        <h2><%= livro.titulo %></h2><p class="book-author"><%= livro.autor %></p>
+        <div class="book-meta"><span><%= livro.ano %></span><span><%- _h.rotuloEstoque(livro.quantidade) %></span></div>
+        <% if (nookUser && nookUser.role === 'funcionario') { %>
+          <div class="d-flex gap-2 mt-3"><a href="/livros/<%= livro.id %>/atualizacao" class="btn btn-sm btn-outline-secondary">Editar</a><a href="/livros/<%= livro.id %>/exclusao" class="btn btn-sm btn-outline-danger">Excluir</a></div>
+        <% } else { %><a href="/reservas/novo" class="btn btn-primary w-100 mt-3" <%= livro.quantidade < 1 ? 'aria-disabled="true"' : '' %>>Reservar livro</a><% } %>
+      </div>
+    </article>
+  <% }) %>
+</div>
+<% if (!listaLivros.length) { %><p class="empty-state">Nenhum livro cadastrado ainda.</p><% } %>
