@@ -1,8 +1,9 @@
-import { Body, Controller, Get, Param, Post, Redirect, Render } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Redirect, Render, Req } from '@nestjs/common';
 import { ReservaService } from './reserva.service';
 import { helpers } from './reserva.view.helpers';
 import { CreateReservaDto } from './dtos/create-reserva.dto';
 import { ValidationView } from 'nest-validation-view';
+import { Livro } from '../livro/livro.entity';
 
 @Controller('reservas')
 export class ReservaController {
@@ -20,19 +21,20 @@ export class ReservaController {
     @Get('novo')
     @Render('reserva/formulario')
     async formularioNovo(): Promise<object> {
-        return {};
+        const listaLivros = await Livro.find();
+        return { listaLivros };
     }
 
     @Post('novo')
-    @Redirect('/reservas')
+    @Redirect('/painel')
     @ValidationView('reserva/formulario', ({ request, errors }) => {
         return {
             reserva: request.body, 
             errors
         };
     })
-    async formularioNovoSalvar(@Body() dados: CreateReservaDto): Promise<void> {
-        await this.reservaService.create(dados);
+    async formularioNovoSalvar(@Req() req: any, @Body() dados: CreateReservaDto): Promise<void> {
+        await this.reservaService.create({ ...dados, clienteId: req.nookUser.clientId, status: 'pendente', dataReserva: new Date() });
     }
 
     @Get(':id/atualizacao')
@@ -49,7 +51,7 @@ export class ReservaController {
     }
 
     @Post(':id/atualizacao')
-    @Redirect('/reservas')
+    @Redirect('/painel')
     @ValidationView('reserva/formulario', ({ request, errors }) => {
 
         const { params, body } = request;
@@ -62,8 +64,6 @@ export class ReservaController {
     async formularioAtualizacaoSalvar(@Param('id') id: number, @Body() dados: CreateReservaDto): Promise<void> {
         await this.reservaService.update(id, dados);
     }
-}
-
 
 @Get(':id/exclusao')
 @Render('reserva/exclusao')
@@ -78,7 +78,8 @@ async formularioExclusao(@Param('id') id: number): Promise<object> {
 }
 
 @Post(':id/exclusao')
-@Redirect('/reservas')
+@Redirect('/painel')
 async formularioExclusaoConfirmar(@Param('id') id: number): Promise<void> {
     await this.reservaService.remove(id);
+}
 }
