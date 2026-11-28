@@ -1,85 +1,85 @@
 import { Body, Controller, Get, Param, Post, Redirect, Render, Req } from '@nestjs/common';
-import { ParticiparService } from './participar.service';
-import { helpers } from './participar.view.helpers';
-import { CreateParticiparDto } from './dtos/create-participar.dto';
+import { ReservaService } from './reserva.service';
+import { helpers } from './reserva.view.helpers';
+import { CreateReservaDto } from './dtos/create-reserva.dto';
 import { ValidationView } from 'nest-validation-view';
-import { Evento } from '../evento/evento.entity';
+import { Livro } from '../livro/livro.entity';
 
-@Controller('participar')
-export class ParticiparController {
+@Controller('reservas')
+export class ReservaController {
 
-    constructor(private readonly participarService: ParticiparService) {}
+    constructor(private readonly reservaService: ReservaService) {}
 
     @Get()
-    @Render('participar/index')
+    @Render('reserva/index')
     async getAll(): Promise<object> {
-        let participacoes = await this.participarService.findAll(); 
+        let reservas = await this.reservaService.findAll(); 
 
-        return { listaParticipacoes: participacoes, _h: helpers }
+        return { listaReservas: reservas, _h: helpers }
     }
 
     @Get('novo')
-    @Render('participar/formulario')
+    @Render('reserva/formulario')
     async formularioNovo(): Promise<object> {
-        const listaEventos = await Evento.find();
-        return { listaEventos };
+        const listaLivros = await Livro.find();
+        return { listaLivros };
     }
 
     @Post('novo')
     @Redirect('/painel')
-    @ValidationView('participar/formulario', ({ request, errors }) => {
+    @ValidationView('reserva/formulario', ({ request, errors }) => {
         return {
-            participar: request.body, 
+            reserva: request.body, 
             errors
         };
     })
-    async formularioNovoSalvar(@Req() req: any, @Body() dados: CreateParticiparDto): Promise<void> {
-        await this.participarService.create({ ...dados, clienteId: req.nookUser.clientId, dataRegistro: new Date() });
+    async formularioNovoSalvar(@Req() req: any, @Body() dados: CreateReservaDto): Promise<void> {
+        await this.reservaService.create({ ...dados, clienteId: req.nookUser.clientId, status: 'pendente', dataReserva: new Date() });
     }
 
     @Get(':id/atualizacao')
-    @Render('participar/formulario')
+    @Render('reserva/formulario')
     async formularioAtualizacao(@Param('id') id: number): Promise<object> {
 
-        const participar = await this.participarService.findOne(id);
+        const reserva = await this.reservaService.findOne(id);
 
-        if(!participar) {
-            throw new Error('Participação não encontrada');
+        if(!reserva) {
+            throw new Error('Reserva não encontrada');
         }
 
-        return { participar, _h: helpers };
+        return { reserva, _h: helpers };
     }
 
     @Post(':id/atualizacao')
     @Redirect('/painel')
-    @ValidationView('participar/formulario', ({ request, errors }) => {
+    @ValidationView('reserva/formulario', ({ request, errors }) => {
 
         const { params, body } = request;
 
         return {
-            participar: { id: params.id, ...body}, 
+            reserva: { id: params.id, ...body}, 
             errors
         };
     })
-    async formularioAtualizacaoSalvar(@Param('id') id: number, @Body() dados: CreateParticiparDto): Promise<void> {
-        await this.participarService.update(id, dados);
+    async formularioAtualizacaoSalvar(@Param('id') id: number, @Body() dados: CreateReservaDto): Promise<void> {
+        await this.reservaService.update(id, dados);
     }
 
 @Get(':id/exclusao')
-@Render('participar/exclusao')
+@Render('reserva/exclusao')
 async formularioExclusao(@Param('id') id: number): Promise<object> {
-    const participar = await this.participarService.findOne(id);
+    const reserva = await this.reservaService.findOne(id);
 
-    if (!participar) {
-        throw new Error('Participação não encontrada');
+    if (!reserva) {
+        throw new Error('Reserva não encontrada');
     }
 
-    return { participar, _h: helpers };
+    return { reserva, _h: helpers };
 }
 
 @Post(':id/exclusao')
 @Redirect('/painel')
 async formularioExclusaoConfirmar(@Param('id') id: number): Promise<void> {
-    await this.participarService.remove(id);
+    await this.reservaService.remove(id);
 }
 }
