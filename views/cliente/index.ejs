@@ -1,8 +1,8 @@
-<h3 class="mt-5">Clientes</h3>
+<h3>Clientes</h3>
 
 <a href="/clientes/novo" class="btn btn-primary mb-3">Novo Cliente</a>
 
-<table class="table table-striped">
+<div class="table-responsive"><table class="table table-striped">
     <thead>
         <tr>
             <th>Nome</th>
@@ -18,10 +18,10 @@
                 <td><%= cliente.email %></td>
                 <td><%= cliente.telefone %></td>
                 <td>
-                    <a href="/clientes/<%= cliente.id %>/atualizacao" class="btn btn-sm btn-secondary">Atualizar</a>
+                    <a href="/clientes/<%= cliente.id %>/atualizacao" class="btn btn-sm btn-secondary me-1">Atualizar</a>
                     <a href="/clientes/<%= cliente.id %>/exclusao" class="btn btn-sm btn-danger">Excluir</a>
                 </td>
             </tr>
         <% }) %>
     </tbody>
-</table>
+</table></div>
