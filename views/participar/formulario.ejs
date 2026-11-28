@@ -1,44 +1,7 @@
-<% const erros = validationErrors(locals.errors); %>
-<% const participar = locals.participar || {} %>
-
-<h3 class="mt-5">
-    <% if (participar?.id) { %>
-        Atualização da
-    <% } else { %>
-        Nova  
-    <% } %>
-    
-    Participação
-</h3>
-
-<form action="<%= participar?.id ? `/participar/${participar.id}/atualizacao` : '/participar/novo' %>" method="post">
-
-    <% if (erros.all.length) { %>
-        <div class="alert alert-danger">
-            <h6>Não foi possível salvar a participação</h6>
-            <ul>
-                <% erros.all.forEach(mensagem => { %>
-                    <li><%= mensagem %></li>
-                <% }) %>
-            </ul>
-        </div> 
-    <% } %>
-
-    <div class="form-group mb-3">
-        <label for="dataRegistro" class="form-label">Data de Registro</label>
-        <input type="datetime-local" class="form-control" name="dataRegistro" value="<%= participar?.dataRegistro %>">
-    </div>
-
-    <div class="form-group mb-3">
-        <label for="clienteId" class="form-label">ID do Cliente</label>
-        <input type="number" class="form-control" name="clienteId" value="<%= participar?.clienteId %>" placeholder="Informe o ID do cliente">
-    </div>
-
-    <div class="form-group mb-3">
-        <label for="eventoId" class="form-label">ID do Evento</label>
-        <input type="number" class="form-control" name="eventoId" value="<%= participar?.eventoId %>" placeholder="Informe o ID do evento">
-    </div>
-
-    <button type="submit" class="btn btn-primary">Salvar</button>
-    <a href="/participar" class="btn btn-secondary">Cancelar</a>
+<h1 class="h2">Participar de um evento</h1><p class="text-muted">Escolha o encontro em que deseja participar. Sua conta será identificada automaticamente.</p>
+<% const erros = validationErrors(locals.errors); const participar = locals.participar || {}; %>
+<% if (erros.all.length) { %><div class="alert alert-danger"><ul class="mb-0"><% erros.all.forEach(mensagem => { %><li><%= mensagem %></li><% }) %></ul></div><% } %>
+<form action="/participar/novo" method="post" class="form-card">
+  <div class="mb-3"><label for="eventoId" class="form-label">Evento</label><select id="eventoId" class="form-select" name="eventoId" required><option value="">Selecione um evento</option><% (listaEventos || []).forEach(evento => { %><option value="<%= evento.id %>" <%= String(participar.eventoId || '') === String(evento.id) ? 'selected' : '' %>><%= evento.titulo %> — <%= evento.data %> às <%= evento.horario %></option><% }) %></select></div>
+  <button type="submit" class="btn btn-primary">Confirmar participação</button> <a href="/eventos" class="btn btn-outline-secondary">Voltar aos eventos</a>
 </form>
