@@ -1,29 +1,6 @@
-<h3 class="mt-5">Eventos</h3>
-
-<a href="/eventos/novo" class="btn btn-primary mb-3">Novo Evento</a>
-
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Nome</th>
-            <th>Data</th>
-            <th>Local</th>
-            <th>Vagas</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% listaEventos.forEach(evento => { %>
-            <tr>
-                <td><%= evento.nome %></td>
-                <td><%= dateFormat(evento.data) %></td>
-                <td><%= evento.local %></td>
-                <td><%- _h.rotuloVagas(evento.vagas) %></td>
-                <td>
-                    <a href="/eventos/<%= evento.id %>/atualizacao" class="btn btn-sm btn-secondary">Atualizar</a>
-                    <a href="/eventos/<%= evento.id %>/exclusao" class="btn btn-sm btn-danger">Excluir</a>
-                </td>
-            </tr>
-        <% }) %>
-    </tbody>
-</table>
+<div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3"><div><h1 class="h2 mb-1">Eventos</h1><p class="text-muted mb-0">Encontros, leituras e experiências da comunidade Nook.</p></div>
+<% if (nookUser && nookUser.role === 'funcionario') { %><a href="/eventos/novo" class="btn btn-primary">+ Adicionar evento</a><% } %></div>
+<div class="table-responsive"><table class="table table-striped align-middle"><thead><tr><th>ID</th><th>Evento</th><th>Data</th><th>Horário</th><th>Local</th><th>Vagas</th><th></th></tr></thead><tbody>
+<% listaEventos.forEach(evento => { %><tr><td><%= evento.id %></td><td><strong><%= evento.titulo %></strong><div class="small text-muted"><%= evento.descricao || '' %></div></td><td><%= dateFormat(evento.data) %></td><td><%= evento.horario %></td><td><%= evento.local %></td><td><%- _h.rotuloVagas(evento.vagas) %></td><td>
+<% if (nookUser && nookUser.role === 'funcionario') { %><a href="/eventos/<%= evento.id %>/atualizacao" class="btn btn-sm btn-outline-secondary me-1">Editar</a><a href="/eventos/<%= evento.id %>/exclusao" class="btn btn-sm btn-outline-danger">Excluir</a><% } else { %><a href="/participar/novo" class="btn btn-sm btn-primary">Participar</a><% } %></td></tr><% }) %>
+<% if (!listaEventos.length) { %><tr><td colspan="7" class="text-center text-muted py-4">Nenhum evento cadastrado ainda.</td></tr><% } %></tbody></table></div>
