@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Entrar | Nook</title><link href="/css/bootstrap.min.css" rel="stylesheet"><link href="/css/style.css" rel="stylesheet">
+  <style>body{min-height:100vh;background:#f4eee5;display:grid;place-items:center;padding:24px}.login-card{width:min(100%,430px);background:#fff;border:1px solid #e8ded1;border-radius:22px;padding:34px;box-shadow:0 18px 55px #49342616}.brand{font-size:2.5rem;font-weight:800;letter-spacing:-.08em;color:#493426}.muted{color:#806d5d}</style>
+</head>
+<body>
+  <main class="login-card">
+    <div class="text-center mb-4"><div class="brand">nook</div><p class="muted mb-0">Cafeteria · Sebo · Encontros</p></div>
+    <h1 class="h4 mb-2">Bem-vindo(a)!</h1><p class="muted mb-4">Entre com seu e-mail e senha para acessar a plataforma.</p>
+    <% if (typeof erro !== 'undefined' && erro) { %><div class="alert alert-danger"><%= erro %></div><% } %>
+    <form action="/login" method="post">
+      <div class="mb-3"><label class="form-label" for="email">E-mail</label><input class="form-control form-control-lg" type="email" id="email" name="email" value="<%= typeof email !== 'undefined' ? email : '' %>" required autocomplete="username"></div>
+      <div class="mb-4"><label class="form-label" for="senha">Senha</label><input class="form-control form-control-lg" type="password" id="senha" name="senha" required autocomplete="current-password"></div>
+      <button class="btn btn-primary btn-lg w-100" type="submit">Entrar</button>
+    </form>
+    <p class="small muted text-center mt-4 mb-0">Acesso exclusivo para clientes e funcionários da Nook.</p>
+  </main>
+</body></html>
